@@ -8,10 +8,9 @@ def mainMenu(fechaIntroducida):
         print("\n 0  fecha_es_tupla\n 1  bisiesto\n 2  fecha_es_valida\n 3  dia_siguiente\n 4  ordinal_dia\n 5  imprimir_3x4\n 6  salir\n")
 
         try:
-            numChoice = int(input("Digite el nume de la opcion que desea ejecutar: "))
+            numChoice = int(input("Digite el número de la opción que desea ejecutar: "))
 
             if numChoice == 0:
-
                 print(fecha_es_tupla(fechaIntroducida));
             elif numChoice == 1:
                 print(1)
@@ -26,10 +25,10 @@ def mainMenu(fechaIntroducida):
             elif numChoice == 6:
                 return
             else:
-                print("Numero invalido")
+                print("Número inválido")
 
         except:
-            print("Caracter Invalido")
+            print("Caracter Inválido")
 
 
 
