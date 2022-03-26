@@ -1,4 +1,4 @@
-from R0_fecha_es_tupla import fecha_es_tupla
+#from R0_fecha_es_tupla import fecha_es_tupla
 
 
 def mainMenu(fechaIntroducida):
@@ -11,7 +11,8 @@ def mainMenu(fechaIntroducida):
             numChoice = int(input("Digite el número de la opción que desea ejecutar: "))
 
             if numChoice == 0:
-                print(fecha_es_tupla(fechaIntroducida));
+               #print(fecha_es_tupla(fechaIntroducida));
+                print()
             elif numChoice == 1:
                 print(1)
             elif numChoice == 2:
