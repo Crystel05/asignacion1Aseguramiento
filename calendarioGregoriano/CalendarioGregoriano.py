@@ -1,8 +1,6 @@
 """
 R0:
 """
-
-
 def fecha_es_tupla(paramFecha):
     if isinstance(paramFecha, tuple):
         if len(paramFecha) == 3:
@@ -25,8 +23,6 @@ no bisiesto
 Input: entero númerico
 Output: Boolean 
 """
-
-
 def bisiesto(anno):
     if anno % 4 != 0:  # no es múltiplo de 4, no es bisiesto
         return False
@@ -43,44 +39,37 @@ def bisiesto(anno):
 """
     R2: Verifica si una fecha es válida en el Calendario Gregoriano
 """
-
-
 def fecha_es_valida(tupla):
     if fecha_es_tupla(tupla):
         if (tupla[0] == 1582):
             if tupla[1] >= 10 and tupla[2] >= 15 and tupla[2] <= 31:
-                print("La fecha ingresada es válida")
                 return True
             else:
-                print("La fecha ingresada no es válida en el Calendario Gregoriano para el año 1582")
+                print("La fecha ingresada no es válida en el Calendario Gregoriano para el año 1582\n")
                 return False
         elif tupla[0] > 1582:
             if dia_es_valido(tupla):
-                print("La fecha ingresada es válida")
                 return True
             else:
-                print("La fecha ingresada no es válida en el Calendario Gregoriano.")
+                print("La fecha ingresada no es válida en el Calendario Gregoriano.\n")
                 return False
         else:
-            print('El año ingresado no es válido en el Calendario Gregoriano')
+            print('El año ingresado no es válido en el Calendario Gregoriano\n')
             return False
     else:
         print("La fecha debe ser ingresada como una tupla de enteros con formato (año, mes, día)")
         return False
-
 
 """
 R3: dada una fecha válida, determinar la fecha del día siguiente
 Input: tupla de fecha
 Output: tupla de una fecha válida
 """
-
-
 def dia_siguiente(tupla):
     anno = tupla[0]
     mes = tupla[1]
     dia = tupla[2]
-    meses30dias = [2, 4, 6, 9, 10]
+    meses30dias = [2, 4, 6, 9, 11]
     if fecha_es_valida(tupla):
         if dia < 28:
             return anno, mes, dia + 1
@@ -109,13 +98,36 @@ def dia_siguiente(tupla):
         return ()
     print("año ", anno, "\nmes ", mes, "\ndia ", dia)
 
+"""
+    R4: determina cuál es la posición de la fecha dada dentro del año dado
+    Retorna un entero con el valor de la posición
+"""
+def ordinal_dia(tupla):
+    ordinal = 1
+    
+    if fecha_es_valida(tupla):
+        fecha_base = (tupla[0], 1, 1)   
+        proximo_dia = dia_siguiente(fecha_base)
+
+        if(fecha_base != tupla):
+            while(proximo_dia != tupla):
+                ordinal += 1
+                proximo_dia = dia_siguiente(proximo_dia)
+            ordinal += 1
+
+            print("La posición de la fecha ingresada en el año es: " , ordinal, "\n")
+            return ordinal
+        else:
+            print("La posición de la fecha ingresada en el año es: " , ordinal, "\n")
+            return ordinal
+    else:
+        print("La fecha ingresada no es válida \n")
+        return 0
 
 """
     Verifica si el día ingresado es válido según el mes ingresado 
     y si el año es bisiesto o no.
 """
-
-
 def dia_es_valido(tupla):
     mes31 = [1, 3, 5, 7, 8, 10, 12]  # meses que tienen 31 días
     mes30 = [4, 6, 9, 11]  # meses que tienen 30 días
@@ -152,19 +164,26 @@ def mainMenu():
             if numChoice == 0:
                 print("\nIntroduzca los tres valores de la fecha para verificar que sean números enteros")
                 print("\nLa fecha es tupla: ", fecha_es_tupla(pedirFechaAux()))
+                input()
             elif numChoice == 1:
                 anno = int(input("\nIngrese un año para verificar que sea bisiesto: "))
                 print("\nEl año es bisiesto: ", bisiesto(anno))
+                input()
             elif numChoice == 2:
                 print("Ingrese una fecha para verificar que sea válida según el calendario gregoriano")
                 print("\nLa fecha es válida: ", fecha_es_valida(pedirFechaAux()))
+                input()
             elif numChoice == 3:
                 print("Ingrese una fecha para determinar la fecha del día siguiente")
                 print("\nLa fecha siguiente es: ", dia_siguiente(pedirFechaAux()))
+                input()
             elif numChoice == 4:
-                print(4)
+                print("Ingrese una fecha para determinar el ordinal")
+                ordinal_dia(pedirFechaAux())
+                input()
             elif numChoice == 5:
                 print(5)
+                input()
             elif numChoice == 6:
                 return
             else:
@@ -173,7 +192,6 @@ def mainMenu():
         except:
             print("Caracter Inválido")
         print("***********************************************************************************************")
-
 
 mainMenu()
 
