@@ -106,7 +106,10 @@ def ordinal_dia(tupla):
     ordinal = 1
 
     if fecha_es_valida(tupla):
-        fecha_base = (tupla[0], 1, 1)
+        if (tupla[0] == 1582):
+            fecha_base = (tupla[0], 10, 15)
+        else:
+            fecha_base = (tupla[0], 1, 1)   
         proximo_dia = dia_siguiente(fecha_base)
 
         if(fecha_base != tupla):
