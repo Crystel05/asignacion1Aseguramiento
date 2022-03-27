@@ -104,9 +104,9 @@ def dia_siguiente(tupla):
 """
 def ordinal_dia(tupla):
     ordinal = 1
-    
+
     if fecha_es_valida(tupla):
-        fecha_base = (tupla[0], 1, 1)   
+        fecha_base = (tupla[0], 1, 1)
         proximo_dia = dia_siguiente(fecha_base)
 
         if(fecha_base != tupla):
@@ -146,6 +146,69 @@ def dia_es_valido(tupla):
         return True
     else:
         return False
+
+
+ ## Formula para calcular dia de una fecha especifica
+def diaFecha(tupla):
+    diasPosibles = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"]
+    dia = tupla[2]
+    mes = tupla[1]
+    anno = tupla[0]
+    if mes < 3:
+        mes = mes + 12
+        anno = anno - 1
+    dia = (((13 * mes + 3) // 5 + dia + anno + (anno / 4) - (anno // 100) + (anno // 400)) % 7)
+    #print(diasPosibles[int(dia)])
+    return int(dia)*4 + 4
+
+
+
+def imprimir_3x4(tupla):
+
+    anno = tupla[0]
+    mesActual = 1
+    diaActual = 1
+
+    nuevaTupla = (anno,1,1)
+    x = 1
+    espaciosInicio = ""
+
+    cantEspacios = diaFecha(nuevaTupla)
+
+
+    while mesActual <= 12:
+        mesStr = str(mesActual)
+        if mesActual < 10:
+            mesStr = "0" + mesStr
+        print("\n\n" + mesStr + "   L   K   M   J   V   S   D")
+
+
+        if cantEspacios > 28:
+            cantEspacios = 4
+        for x in range(cantEspacios):
+            espaciosInicio += " "
+
+
+        print(espaciosInicio + "01", end = '')
+
+        espaciosInicio = ""
+        diaActual += 1
+
+        while diaActual > 1:
+            cantEspacios += 4
+            if cantEspacios > 28:
+                print("\n  ", end = '')
+                cantEspacios = 4
+            strDia = str(diaActual)
+            if diaActual < 10:
+                strDia = "0" + strDia
+            print("  " + strDia , end = '')
+            diaActual = (dia_siguiente((anno, mesActual, diaActual)))[2]
+
+        mesActual += 1
+        cantEspacios += 4
+
+
 
 def pedirFechaAux():
     anno = int(input("Ingrese un año: "))
@@ -193,9 +256,9 @@ def mainMenu():
             print("Caracter Inválido")
         print("***********************************************************************************************")
 
-mainMenu()
+#mainMenu()
 
-# tupla = (5,6,7)
+tupla = (1992,15,7)
 # fecha_es_tupla(tupla)
 
 # print(bisiesto(2035))
@@ -207,3 +270,6 @@ mainMenu()
 #     print("Fecha actual: ", tupla)
 #     print("Nueva Fecha: ", dia_siguiente(tupla))
 #     print("*********************\n")
+
+imprimir_3x4(tupla)
+
