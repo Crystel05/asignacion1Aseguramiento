@@ -96,7 +96,6 @@ def dia_siguiente(tupla):
                         return anno, mes, dia + 1
     else:
         return ()
-    print("año ", anno, "\nmes ", mes, "\ndia ", dia)
 
 """
     R4: determina cuál es la posición de la fecha dada dentro del año dado
@@ -298,11 +297,11 @@ tupla = (1992,15,7)
 # print(dia_siguiente((2020, 2, 15)))
 
 # pruebas = [(2022, 1, 3), (2020, 2, 29), (2020, 2, 16), (2020, 2, 28), (2027, 3, 7), (2092, 4, 30), (2098, 5, 31), (2434, 6, 5), (2022, 7, 18), (2020, 8, 30), (2021, 9, 27), (2028, 10, 29), (2014, 11, 30), (2015, 12, 4), (2032, 12, 31)]
-#
-# for tupla in pruebas:
-#     print("Fecha actual: ", tupla)
-#     print("Nueva Fecha: ", dia_siguiente(tupla))
-#     print("*********************\n")
+pruebas = [1992, 2016, 1582, 2017, 2020, 3542, 1852, 2012]
+print("Pruebas R1")
+for anno in pruebas:
+    print("Año: ", anno, " Es bisiesto: ", bisiesto(anno))
+    # print("\n")
 
 imprimir_3x4(tupla)
 
