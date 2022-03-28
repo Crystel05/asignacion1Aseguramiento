@@ -1,5 +1,7 @@
 """
-R0:
+    R0: verifica que el dato ingresados esa una tupla de tres valores positivos
+    Input: tupla
+    Output: Boolean
 """
 def fecha_es_tupla(paramFecha):
     if isinstance(paramFecha, tuple):
@@ -16,12 +18,11 @@ def fecha_es_tupla(paramFecha):
         print("El parámetro introducido no es una tupla \n")
         return False
 
-
 """
-R1: dado un año dentro del rango definido (rango) determinar si el año es o 
-no bisiesto
-Input: entero númerico
-Output: Boolean 
+    R1: dado un año dentro del rango definido determinar si el año es o 
+    no bisiesto
+    Input: entero númerico
+    Output: Boolean 
 """
 def bisiesto(anno):
     if anno % 4 != 0:  # no es múltiplo de 4, no es bisiesto
@@ -35,9 +36,10 @@ def bisiesto(anno):
         else:  # no es múltiplo de 100 ni de 400
             return True
 
-
 """
     R2: Verifica si una fecha es válida en el Calendario Gregoriano
+    Input: Tupla
+    Output: Boolean
 """
 def fecha_es_valida(tupla):
     if fecha_es_tupla(tupla):
@@ -61,9 +63,9 @@ def fecha_es_valida(tupla):
         return False
 
 """
-R3: dada una fecha válida, determinar la fecha del día siguiente
-Input: tupla de fecha
-Output: tupla de una fecha válida
+    R3: dada una fecha válida, determinar la fecha del día siguiente
+    Input: tupla de fecha
+    Output: tupla de una fecha válida
 """
 def dia_siguiente(tupla):
     anno = tupla[0]
@@ -100,13 +102,16 @@ def dia_siguiente(tupla):
 """
     R4: determina cuál es la posición de la fecha dada dentro del año dado
     Retorna un entero con el valor de la posición
+    Input: tupla
+    Output: Boolean
 """
 def ordinal_dia(tupla):
     ordinal = 1
 
     if fecha_es_valida(tupla):
         if (tupla[0] == 1582):
-            fecha_base = (tupla[0], 10, 15)
+            print("No es posible calcular la posición de un día del año 1582.")
+            return 0
         else:
             fecha_base = (tupla[0], 1, 1)   
         proximo_dia = dia_siguiente(fecha_base)
@@ -149,7 +154,6 @@ def dia_es_valido(tupla):
     else:
         return False
 
-
  ## Formula de Zeller para calcular dia de una fecha especifica
 def diaFecha(tupla):
     dia = tupla[2]
@@ -161,9 +165,9 @@ def diaFecha(tupla):
     dia = (((13 * mes + 3) // 5 + dia + anno + (anno / 4) - (anno // 100) + (anno // 400)) % 7)
     return int(dia)*4 + 4
 
-
 """
     R5: Imprime en 3 lineas de 4 meses el calendario anual de la fecha proporcionada
+    Input: valor númerico del año
 """
 def imprimir_3x4(annoParam):
 
@@ -231,8 +235,6 @@ def imprimir_3x4(annoParam):
             elif mesActual == 9:
                 lineDicc = {9: [], 10: [], 11: [], 12: []}
 
-
-
 def pedirFechaAux():
     anno = int(input("Ingrese un año: "))
     mes = int(input("Ingrese un mes: "))
@@ -281,19 +283,3 @@ def mainMenu():
         print("***********************************************************************************************")
 
 mainMenu()
-
-#tupla = (2001,15,7)
-# fecha_es_tupla(tupla)
-
-# print(bisiesto(2035))
-# print(dia_siguiente((2020, 2, 15)))
-
-# pruebas = [(2022, 1, 3), (2020, 2, 29), (2020, 2, 16), (2020, 2, 28), (2027, 3, 7), (2092, 4, 30), (2098, 5, 31), (2434, 6, 5), (2022, 7, 18), (2020, 8, 30), (2021, 9, 27), (2028, 10, 29), (2014, 11, 30), (2015, 12, 4), (2032, 12, 31)]
-#pruebas = [1992, 2016, 1582, 2017, 2020, 3542, 1852, 2012]
-#print("Pruebas R1")
-#for anno in pruebas:
-# print("Año: ", anno, " Es bisiesto: ", bisiesto(anno))
-    # print("\n")
-
-#imprimir_3x4(tupla)
-
