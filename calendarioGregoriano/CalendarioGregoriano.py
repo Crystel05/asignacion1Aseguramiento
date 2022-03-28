@@ -150,9 +150,8 @@ def dia_es_valido(tupla):
         return False
 
 
- ## Formula para calcular dia de una fecha especifica
+ ## Formula de Zeller para calcular dia de una fecha especifica
 def diaFecha(tupla):
-    diasPosibles = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"]
     dia = tupla[2]
     mes = tupla[1]
     anno = tupla[0]
@@ -160,85 +159,77 @@ def diaFecha(tupla):
         mes = mes + 12
         anno = anno - 1
     dia = (((13 * mes + 3) // 5 + dia + anno + (anno / 4) - (anno // 100) + (anno // 400)) % 7)
-    #print(diasPosibles[int(dia)])
     return int(dia)*4 + 4
 
 
-
+"""
+    R5: Imprime en 3 lineas de 4 meses el calendario anual de la fecha proporcionada
+"""
 def imprimir_3x4(tupla):
 
     anno = tupla[0]
     mesActual = 1
-    diaActual = 1
+    diaActual = 1               #variables de medicion
     nuevaTupla = (anno,1,1)
     x = 1
     espaciosInicio = ""
     cantEspacios = diaFecha(nuevaTupla)
-    lineDicc = { 1:[] , 2:[],3:[],4:[], 5:[], 6:[]}
-    ultimosEspacios = 0
+    lineDicc = { 1:[] , 2:[],3:[],4:[]}   #diccionario de impresion
 
-
-    while mesActual <= 12:
+    while mesActual <= 12:      #avanza mes a mes
 
         lineaActual = "       "
         mesStr = str(mesActual)
         if mesActual < 10:
             mesStr = "0" + mesStr
-        lineDicc[mesActual].append(lineaActual + mesStr + ")  L   K   M   J   V   S   D")
+        lineDicc[mesActual].append(lineaActual + mesStr + ")  L   K   M   J   V   S   D") #Header de cada mes
 
         if cantEspacios > 28:
             cantEspacios = 4
-        for x in range(cantEspacios):
+        for x in range(cantEspacios):      #Calculo del espacio para dia de la semana de inicio de mes
             espaciosInicio += " "
 
         lineaActual += espaciosInicio + "01"
-
         espaciosInicio = ""
         diaActual += 1
 
-        while diaActual > 1:
+        while diaActual > 1:        #avanza dia a dia en un mes
             cantEspacios += 4
-            if cantEspacios > 28:
+            if cantEspacios > 28:   #Si ya llego a domingo pasar a linea siguiente (Lunes)
                 lineDicc[mesActual].append(lineaActual)
                 lineaActual = "         "
                 cantEspacios = 4
             strDia = str(diaActual)
             if diaActual < 10:
                 strDia = "0" + strDia
-            lineaActual += "  " + strDia
-            diaActual = (dia_siguiente((anno, mesActual, diaActual)))[2]
+            lineaActual += "  " + strDia  # A la linea actual en el mes se le suma el nuevo dia
+            diaActual = (dia_siguiente((anno, mesActual, diaActual)))[2]    #Se pasa de dia
 
-        # for x in range(ultimosEspacios):
-        #      lineaActual = " " + lineaActual
 
-        lineDicc[mesActual].append(lineaActual)
-
+        lineDicc[mesActual].append(lineaActual) #Se llena la ultima lidea del mes
         cantEspacios += 4
-        #ultimosEspacios = 32 - cantEspacios
-
         mesActual += 1
 
-
-        if mesActual == 7 or mesActual == 13:
-            dicCounter = 0
+        if mesActual == 5 or mesActual == 9 or mesActual == 13:  #Cada 4 meses se imprimen las lineas en orden de cada mes
+            dicCounter = 0                                       #(Todas las primeras, todas las segundas...)
             while dicCounter <= 7:
                 for key in lineDicc:
                     try:
                         print(lineDicc[key][dicCounter], end='')
                         longlin = 37 - len(lineDicc[key][dicCounter])
                         while longlin > 0:
-                            print(" ", end='')
-                            longlin -= 1
+                            print(" ", end='')                           #Para mantener el formato se imprimen siempre 7 lineas de 7 dias, si el orden no da para 7 lineas
+                            longlin -= 1                                 #se rellena el espacio con " "
                     except:
                         print("                                     ", end='')
 
                         continue
                 print("\n")
                 dicCounter +=1
-
-            lineDicc = {7: [], 8: [], 9: [], 10: [], 11: [], 12: []}
-
-
+            if mesActual == 5:
+                lineDicc = {5: [], 6: [], 7: [], 8: []}
+            elif mesActual == 9:
+                lineDicc = {9: [], 10: [], 11: [], 12: []}
 
 
 
