@@ -165,9 +165,9 @@ def diaFecha(tupla):
 """
     R5: Imprime en 3 lineas de 4 meses el calendario anual de la fecha proporcionada
 """
-def imprimir_3x4(tupla):
+def imprimir_3x4(annoParam):
 
-    anno = tupla[0]
+    anno = annoParam
     mesActual = 1
     diaActual = 1               #variables de medicion
     nuevaTupla = (anno,1,1)
@@ -250,27 +250,27 @@ def mainMenu():
             if numChoice == 0:
                 print("\nIntroduzca los tres valores de la fecha para verificar que sean números enteros")
                 print("\nLa fecha es tupla: ", fecha_es_tupla(pedirFechaAux()))
-                input()
+                print("\n")
             elif numChoice == 1:
                 anno = int(input("\nIngrese un año para verificar que sea bisiesto: "))
                 print("\nEl año es bisiesto: ", bisiesto(anno))
-                input()
+                print("\n")
             elif numChoice == 2:
                 print("Ingrese una fecha para verificar que sea válida según el calendario gregoriano")
                 print("\nLa fecha es válida: ", fecha_es_valida(pedirFechaAux()))
-                input()
+                print("\n")
             elif numChoice == 3:
                 print("Ingrese una fecha para determinar la fecha del día siguiente")
                 print("\nLa fecha siguiente es: ", dia_siguiente(pedirFechaAux()))
-                input()
+                print("\n")
             elif numChoice == 4:
                 print("Ingrese una fecha para determinar el ordinal")
                 ordinal_dia(pedirFechaAux())
-                input()
+                print("\n")
             elif numChoice == 5:
-                print("Ingrese una fecha para imprimir el calendario gregoriano de su año")
-                imprimir_3x4(pedirFechaAux())
-                input()
+                anno = int(input("\nIngrese un año para imprimir su calendario gregoriano: "))
+                imprimir_3x4(anno)
+                print("\n")
             elif numChoice == 6:
                 return
             else:
