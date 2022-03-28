@@ -171,28 +171,28 @@ def imprimir_3x4(tupla):
     anno = tupla[0]
     mesActual = 1
     diaActual = 1
-
     nuevaTupla = (anno,1,1)
     x = 1
     espaciosInicio = ""
-
     cantEspacios = diaFecha(nuevaTupla)
+    lineDicc = { 1:[] , 2:[],3:[],4:[], 5:[], 6:[]}
+    ultimosEspacios = 0
 
 
     while mesActual <= 12:
+
+        lineaActual = "       "
         mesStr = str(mesActual)
         if mesActual < 10:
             mesStr = "0" + mesStr
-        print("\n\n" + mesStr + "   L   K   M   J   V   S   D")
-
+        lineDicc[mesActual].append(lineaActual + mesStr + ")  L   K   M   J   V   S   D")
 
         if cantEspacios > 28:
             cantEspacios = 4
         for x in range(cantEspacios):
             espaciosInicio += " "
 
-
-        print(espaciosInicio + "01", end = '')
+        lineaActual += espaciosInicio + "01"
 
         espaciosInicio = ""
         diaActual += 1
@@ -200,16 +200,46 @@ def imprimir_3x4(tupla):
         while diaActual > 1:
             cantEspacios += 4
             if cantEspacios > 28:
-                print("\n  ", end = '')
+                lineDicc[mesActual].append(lineaActual)
+                lineaActual = "         "
                 cantEspacios = 4
             strDia = str(diaActual)
             if diaActual < 10:
                 strDia = "0" + strDia
-            print("  " + strDia , end = '')
+            lineaActual += "  " + strDia
             diaActual = (dia_siguiente((anno, mesActual, diaActual)))[2]
 
-        mesActual += 1
+        # for x in range(ultimosEspacios):
+        #      lineaActual = " " + lineaActual
+
+        lineDicc[mesActual].append(lineaActual)
+
         cantEspacios += 4
+        #ultimosEspacios = 32 - cantEspacios
+
+        mesActual += 1
+
+
+        if mesActual == 7 or mesActual == 13:
+            dicCounter = 0
+            while dicCounter <= 7:
+                for key in lineDicc:
+                    try:
+                        print(lineDicc[key][dicCounter], end='')
+                        longlin = 37 - len(lineDicc[key][dicCounter])
+                        while longlin > 0:
+                            print(" ", end='')
+                            longlin -= 1
+                    except:
+                        print("                                     ", end='')
+
+                        continue
+                print("\n")
+                dicCounter +=1
+
+            lineDicc = {7: [], 8: [], 9: [], 10: [], 11: [], 12: []}
+
+
 
 
 
