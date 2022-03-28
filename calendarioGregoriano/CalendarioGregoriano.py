@@ -277,7 +277,8 @@ def mainMenu():
                 ordinal_dia(pedirFechaAux())
                 input()
             elif numChoice == 5:
-                print(5)
+                print("Ingrese una fecha para imprimir el calendario gregoriano de su año")
+                imprimir_3x4(pedirFechaAux())
                 input()
             elif numChoice == 6:
                 return
@@ -288,20 +289,20 @@ def mainMenu():
             print("Caracter Inválido")
         print("***********************************************************************************************")
 
-#mainMenu()
+mainMenu()
 
-tupla = (1992,15,7)
+#tupla = (2001,15,7)
 # fecha_es_tupla(tupla)
 
 # print(bisiesto(2035))
 # print(dia_siguiente((2020, 2, 15)))
 
 # pruebas = [(2022, 1, 3), (2020, 2, 29), (2020, 2, 16), (2020, 2, 28), (2027, 3, 7), (2092, 4, 30), (2098, 5, 31), (2434, 6, 5), (2022, 7, 18), (2020, 8, 30), (2021, 9, 27), (2028, 10, 29), (2014, 11, 30), (2015, 12, 4), (2032, 12, 31)]
-pruebas = [1992, 2016, 1582, 2017, 2020, 3542, 1852, 2012]
-print("Pruebas R1")
-for anno in pruebas:
-    print("Año: ", anno, " Es bisiesto: ", bisiesto(anno))
+#pruebas = [1992, 2016, 1582, 2017, 2020, 3542, 1852, 2012]
+#print("Pruebas R1")
+#for anno in pruebas:
+# print("Año: ", anno, " Es bisiesto: ", bisiesto(anno))
     # print("\n")
 
-imprimir_3x4(tupla)
+#imprimir_3x4(tupla)
 
