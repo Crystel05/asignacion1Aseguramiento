@@ -3,6 +3,8 @@
     Input: tupla
     Output: Boolean
 """
+
+
 def fecha_es_tupla(paramFecha):
     if isinstance(paramFecha, tuple):
         if len(paramFecha) == 3:
@@ -18,29 +20,38 @@ def fecha_es_tupla(paramFecha):
         print("El parámetro introducido no es una tupla \n")
         return False
 
+
 """
     R1: dado un año dentro del rango definido determinar si el año es o 
     no bisiesto
     Input: entero númerico
     Output: Boolean 
 """
+
+
 def bisiesto(anno):
-    if anno % 4 != 0:  # no es múltiplo de 4, no es bisiesto
+    if anno >= 1582:
+        if anno % 4 != 0:  # no es múltiplo de 4, no es bisiesto
+            return False
+        else:  # es múltiplo de 4
+            if anno % 100 == 0:  # es múltiplo de 100
+                if anno % 400 == 0:  # es múltiplo de 400
+                    return True  # es bisiesto porque cumple con las tres condiciones
+                else:
+                    return False  # no es bisiesto porque no es múltiplo de 400
+            else:  # no es múltiplo de 100 ni de 400
+                return True
+    else:
         return False
-    else:  # es múltiplo de 4
-        if anno % 100 == 0:  # es múltiplo de 100
-            if anno % 400 == 0:  # es múltiplo de 400
-                return True  # es bisiesto porque cumple con las tres condiciones
-            else:
-                return False  # no es bisiesto porque no es múltiplo de 400
-        else:  # no es múltiplo de 100 ni de 400
-            return True
+
 
 """
     R2: Verifica si una fecha es válida en el Calendario Gregoriano
     Input: Tupla
     Output: Boolean
 """
+
+
 def fecha_es_valida(tupla):
     if fecha_es_tupla(tupla):
         if (tupla[0] == 1582):
@@ -62,11 +73,14 @@ def fecha_es_valida(tupla):
         print("La fecha debe ser ingresada como una tupla de enteros con formato (año, mes, día)")
         return False
 
+
 """
     R3: dada una fecha válida, determinar la fecha del día siguiente
     Input: tupla de fecha
     Output: tupla de una fecha válida
 """
+
+
 def dia_siguiente(tupla):
     anno = tupla[0]
     mes = tupla[1]
@@ -99,12 +113,15 @@ def dia_siguiente(tupla):
     else:
         return ()
 
+
 """
     R4: determina cuál es la posición de la fecha dada dentro del año dado
     Retorna un entero con el valor de la posición
     Input: tupla
     Output: Boolean
 """
+
+
 def ordinal_dia(tupla):
     ordinal = 1
 
@@ -113,28 +130,31 @@ def ordinal_dia(tupla):
             print("No es posible calcular la posición de un día del año 1582.")
             return 0
         else:
-            fecha_base = (tupla[0], 1, 1)   
+            fecha_base = (tupla[0], 1, 1)
         proximo_dia = dia_siguiente(fecha_base)
 
-        if(fecha_base != tupla):
-            while(proximo_dia != tupla):
+        if (fecha_base != tupla):
+            while (proximo_dia != tupla):
                 ordinal += 1
                 proximo_dia = dia_siguiente(proximo_dia)
             ordinal += 1
 
-            print("La posición de la fecha ingresada en el año es: " , ordinal, "\n")
+            print("La posición de la fecha ingresada en el año es: ", ordinal, "\n")
             return ordinal
         else:
-            print("La posición de la fecha ingresada en el año es: " , ordinal, "\n")
+            print("La posición de la fecha ingresada en el año es: ", ordinal, "\n")
             return ordinal
     else:
         print("La fecha ingresada no es válida \n")
         return 0
 
+
 """
     Verifica si el día ingresado es válido según el mes ingresado 
     y si el año es bisiesto o no.
 """
+
+
 def dia_es_valido(tupla):
     mes31 = [1, 3, 5, 7, 8, 10, 12]  # meses que tienen 31 días
     mes30 = [4, 6, 9, 11]  # meses que tienen 30 días
@@ -154,7 +174,8 @@ def dia_es_valido(tupla):
     else:
         return False
 
- ## Formula de Zeller para calcular dia de una fecha especifica
+
+## Formula de Zeller para calcular dia de una fecha especifica
 def diaFecha(tupla):
     dia = tupla[2]
     mes = tupla[1]
@@ -163,43 +184,45 @@ def diaFecha(tupla):
         mes = mes + 12
         anno = anno - 1
     dia = (((13 * mes + 3) // 5 + dia + anno + (anno / 4) - (anno // 100) + (anno // 400)) % 7)
-    return int(dia)*4 + 4
+    return int(dia) * 4 + 4
+
 
 """
     R5: Imprime en 3 lineas de 4 meses el calendario anual de la fecha proporcionada
     Input: valor númerico del año
 """
-def imprimir_3x4(annoParam):
 
+
+def imprimir_3x4(annoParam):
     anno = annoParam
     mesActual = 1
-    diaActual = 1               #variables de medicion
-    nuevaTupla = (anno,1,1)
+    diaActual = 1  # variables de medicion
+    nuevaTupla = (anno, 1, 1)
     x = 1
     espaciosInicio = ""
     cantEspacios = diaFecha(nuevaTupla)
-    lineDicc = { 1:[] , 2:[],3:[],4:[]}   #diccionario de impresion
+    lineDicc = {1: [], 2: [], 3: [], 4: []}  # diccionario de impresion
 
-    while mesActual <= 12:      #avanza mes a mes
+    while mesActual <= 12:  # avanza mes a mes
 
         lineaActual = "       "
         mesStr = str(mesActual)
         if mesActual < 10:
             mesStr = "0" + mesStr
-        lineDicc[mesActual].append(lineaActual + mesStr + ")  L   K   M   J   V   S   D") #Header de cada mes
+        lineDicc[mesActual].append(lineaActual + mesStr + ")  L   K   M   J   V   S   D")  # Header de cada mes
 
         if cantEspacios > 28:
             cantEspacios = 4
-        for x in range(cantEspacios):      #Calculo del espacio para dia de la semana de inicio de mes
+        for x in range(cantEspacios):  # Calculo del espacio para dia de la semana de inicio de mes
             espaciosInicio += " "
 
         lineaActual += espaciosInicio + "01"
         espaciosInicio = ""
         diaActual += 1
 
-        while diaActual > 1:        #avanza dia a dia en un mes
+        while diaActual > 1:  # avanza dia a dia en un mes
             cantEspacios += 4
-            if cantEspacios > 28:   #Si ya llego a domingo pasar a linea siguiente (Lunes)
+            if cantEspacios > 28:  # Si ya llego a domingo pasar a linea siguiente (Lunes)
                 lineDicc[mesActual].append(lineaActual)
                 lineaActual = "         "
                 cantEspacios = 4
@@ -207,33 +230,34 @@ def imprimir_3x4(annoParam):
             if diaActual < 10:
                 strDia = "0" + strDia
             lineaActual += "  " + strDia  # A la linea actual en el mes se le suma el nuevo dia
-            diaActual = (dia_siguiente((anno, mesActual, diaActual)))[2]    #Se pasa de dia
+            diaActual = (dia_siguiente((anno, mesActual, diaActual)))[2]  # Se pasa de dia
 
-
-        lineDicc[mesActual].append(lineaActual) #Se llena la ultima lidea del mes
+        lineDicc[mesActual].append(lineaActual)  # Se llena la ultima lidea del mes
         cantEspacios += 4
         mesActual += 1
 
-        if mesActual == 5 or mesActual == 9 or mesActual == 13:  #Cada 4 meses se imprimen las lineas en orden de cada mes
-            dicCounter = 0                                       #(Todas las primeras, todas las segundas...)
+        if mesActual == 5 or mesActual == 9 or mesActual == 13:  # Cada 4 meses se imprimen las lineas en orden de cada mes
+            dicCounter = 0  # (Todas las primeras, todas las segundas...)
             while dicCounter <= 7:
                 for key in lineDicc:
                     try:
                         print(lineDicc[key][dicCounter], end='')
                         longlin = 37 - len(lineDicc[key][dicCounter])
                         while longlin > 0:
-                            print(" ", end='')                           #Para mantener el formato se imprimen siempre 7 lineas de 7 dias, si el orden no da para 7 lineas
-                            longlin -= 1                                 #se rellena el espacio con " "
+                            print(" ",
+                                  end='')  # Para mantener el formato se imprimen siempre 7 lineas de 7 dias, si el orden no da para 7 lineas
+                            longlin -= 1  # se rellena el espacio con " "
                     except:
                         print("                                     ", end='')
 
                         continue
                 print("\n")
-                dicCounter +=1
+                dicCounter += 1
             if mesActual == 5:
                 lineDicc = {5: [], 6: [], 7: [], 8: []}
             elif mesActual == 9:
                 lineDicc = {9: [], 10: [], 11: [], 12: []}
+
 
 def pedirFechaAux():
     anno = int(input("Ingrese un año: "))
@@ -241,11 +265,12 @@ def pedirFechaAux():
     dia = int(input("Ingrese un día: "))
     return anno, mes, dia
 
+
 def mainMenu():
     while (True):
 
-        print(
-            "\n 0  fecha_es_tupla\n 1  bisiesto\n 2  fecha_es_valida\n 3  dia_siguiente\n 4  ordinal_dia\n 5  imprimir_3x4\n 6  salir\n")
+        print("\n 0  fecha_es_tupla\n 1  bisiesto\n 2  fecha_es_valida\n 3  dia_siguiente\n 4  ordinal_dia\n 5  "
+              "imprimir_3x4\n 6  salir\n")
         try:
             numChoice = int(input("Digite el número de la opción que desea ejecutar: "))
 
@@ -281,5 +306,6 @@ def mainMenu():
         except:
             print("Caracter Inválido")
         print("***********************************************************************************************")
+
 
 mainMenu()
