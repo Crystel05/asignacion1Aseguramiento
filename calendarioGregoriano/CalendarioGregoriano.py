@@ -1,3 +1,5 @@
+from datetime import date
+
 """
     R0: verifica que el dato ingresados esa una tupla de tres valores positivos
     Input: tupla
@@ -266,6 +268,39 @@ def pedirFechaAux():
     return anno, mes, dia
 
 
+""" 
+R7 fecha futura
+"""
+
+
+def fecha_futura(fecha, diasFuturo):
+    if fecha_es_valida(fecha):
+        if diasFuturo == 0:
+            return fecha
+        elif diasFuturo > 0:
+            n = 0
+            fechaFuturo = fecha
+            while diasFuturo > n:
+                fechaFuturo = dia_siguiente(fechaFuturo)
+                n += 1
+            return fechaFuturo
+        else:
+            print("El número de días tiene que ser mayor o igual a 0")
+            return ()
+    else:
+        return ()
+
+
+"""
+R10 
+"""
+
+
+def fecha_hoy():
+    fechaActual = str(date.today()).split("-")
+    return int(fechaActual[0]), int(fechaActual[1]), int(fechaActual[2])
+
+
 def mainMenu():
     while (True):
 
@@ -308,4 +343,5 @@ def mainMenu():
         print("***********************************************************************************************")
 
 
-mainMenu()
+print(fecha_hoy())
+# mainMenu()
