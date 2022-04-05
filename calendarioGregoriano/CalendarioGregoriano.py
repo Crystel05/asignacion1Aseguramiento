@@ -269,10 +269,24 @@ def pedirFechaAux():
 
 
 """ 
+R6: Auxiliar de diaFecha que devuelve un código dependiente del dia de la semana de la fecha proporcionada
+    Codigo:  0 = domingo, 1 = lunes, 2 = martes, 3 = miércoles, 4 = jueves, 5 = viernes, 6 = sábado
+"""
+def dia_semana (fecha):
+    if(fecha_es_valida(fecha)):
+        codigoDia = (diaFecha(fecha) - 4) / 4
+        codigoDia = codigoDia + 1
+
+        if codigoDia > 6:
+            codigoDia = 0
+
+        print("\n")
+        return int(codigoDia)
+
+
+""" 
 R7 fecha futura
 """
-
-
 def fecha_futura(fecha, diasFuturo):
     if fecha_es_valida(fecha):
         if diasFuturo == 0:
@@ -291,10 +305,46 @@ def fecha_futura(fecha, diasFuturo):
         return ()
 
 
+""" 
+R8 Retorna la cantidad de dias pasados entre las dos fechas proporcionadas
+"""
+def dias_entre (fecha1, fecha2):
+    if fecha_es_valida(fecha1) and fecha_es_valida(fecha2):
+
+        fechaMayor = True
+
+        if fecha1 == fecha2:
+                return 0
+
+        if fecha1[0] < fecha2[0]:
+            fechaMayor = False
+        elif fecha1[0] == fecha2[0]:
+
+            if fecha1[1] < fecha2[1]:
+                fechaMayor = False
+            elif fecha1[1] == fecha2[1]:
+
+                if fecha1[2] > fecha2[2]:
+                    return fecha1[2] - fecha2[2]
+                else:
+                    return fecha2[2] - fecha1[2]
+
+        contadorDias = 0
+        if fechaMayor:
+            tuplaAux = fecha2
+            fecha2 = fecha1
+            fecha1 = tuplaAux
+
+        while fecha1 != fecha2:
+            fecha1 = dia_siguiente(fecha1)
+            contadorDias += 1
+
+        print("\n")
+        return contadorDias
+
 """
 R10 
 """
-
 
 def fecha_hoy():
     fechaActual = str(date.today()).split("-")
@@ -305,7 +355,7 @@ def mainMenu():
     while (True):
 
         print("\n 0  fecha_es_tupla\n 1  bisiesto\n 2  fecha_es_valida\n 3  dia_siguiente\n 4  ordinal_dia\n 5  "
-              "imprimir_3x4\n 6  salir\n")
+              "imprimir_3x4\n 6  dia_semana\n 7  fecha_futura\n 8  dias_entre\n 9  edad_al\n10  fecha_hoy\n11  edad_hoy\n12  salir\n")
         try:
             numChoice = int(input("Digite el número de la opción que desea ejecutar: "))
 
@@ -333,7 +383,35 @@ def mainMenu():
                 anno = int(input("\nIngrese un año para imprimir su calendario gregoriano: "))
                 imprimir_3x4(anno)
                 print("\n")
+            elif numChoice == 5:
+                anno = int(input("\nIngrese un año para imprimir su calendario gregoriano: "))
+                imprimir_3x4(anno)
+                print("\n")
+            elif numChoice == 5:
+                anno = int(input("\nIngrese un año para imprimir su calendario gregoriano: "))
+                imprimir_3x4(anno)
+                print("\n")
+            elif numChoice == 5:
+                anno = int(input("\nIngrese un año para imprimir su calendario gregoriano: "))
+                imprimir_3x4(anno)
+                print("\n")
             elif numChoice == 6:
+                print("\nIngrese una fecha para determinar su dia de la semana: ")
+                print(dia_semana(pedirFechaAux()))
+                print("\n")
+            elif numChoice == 7:
+                print("\n")
+            elif numChoice == 8:
+                print("\nIngrese dos fechas para determinar los dias pasados entre ambas: ")
+                print(dias_entre(pedirFechaAux(), pedirFechaAux()))
+                print("\n")
+            elif numChoice == 9:
+                print("\n")
+            elif numChoice == 10:
+                print("\n")
+            elif numChoice == 11:
+                print("\n")
+            elif numChoice == 12:
                 return
             else:
                 print("Número inválido")
@@ -342,6 +420,4 @@ def mainMenu():
             print("Caracter Inválido")
         print("***********************************************************************************************")
 
-
-print(fecha_hoy())
-# mainMenu()
+mainMenu()
