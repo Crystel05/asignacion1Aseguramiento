@@ -2,8 +2,7 @@ import unittest
 
 import CalendarioGregoriano as cg
 
-# python -m unittest -v test_CalendarioGregoriano
-
+# python -m unittest -v test_CalendarioGregoriano1a
 
 class TestCalendarioGregoriano(unittest.TestCase):
 
