@@ -11,14 +11,14 @@ def fecha_es_tupla(paramFecha):
         if len(paramFecha) == 3:
             for item in paramFecha:
                 if not isinstance(item, int) or item < 0:
-                    print("La tupla introducida contiene items no numerales o menores a 0")
+                    #print("La tupla introducida contiene items no numerales o menores a 0")
                     return False
             return True
         else:
-            print("La cantidad de items en la tupla es diferente de 3 \n")
+            #print("La cantidad de items en la tupla es diferente de 3 \n")
             return False
     else:
-        print("El parámetro introducido no es una tupla \n")
+        #print("El parámetro introducido no es una tupla \n")
         return False
 
 """
@@ -53,19 +53,19 @@ def fecha_es_valida(tupla):
             if tupla[1] >= 10 and tupla[2] >= 15 and tupla[2] <= 31:
                 return True
             else:
-                print("La fecha ingresada no es válida en el Calendario Gregoriano para el año 1582\n")
+                #print("La fecha ingresada no es válida en el Calendario Gregoriano para el año 1582\n")
                 return False
         elif tupla[0] > 1582:
             if dia_es_valido(tupla):
                 return True
             else:
-                print("La fecha ingresada no es válida en el Calendario Gregoriano.\n")
+                #print("La fecha ingresada no es válida en el Calendario Gregoriano.\n")
                 return False
         else:
-            print('El año ingresado no es válido en el Calendario Gregoriano\n')
+            #print('El año ingresado no es válido en el Calendario Gregoriano\n')
             return False
     else:
-        print("La fecha debe ser ingresada como una tupla de enteros con formato (año, mes, día)")
+        #print("La fecha debe ser ingresada como una tupla de enteros con formato (año, mes, día)")
         return False
 
 """
@@ -294,10 +294,9 @@ def edad_al(tuplaFecha1, tuplaFecha2):
 
             return (annos, meses, dias)
         else:
-            print("La fecha 1 debe ser menor a la fecha 2")
+            return "La fecha 1 debe ser menor a la fecha 2"
     else:
-        print("Alguna de las fechas ingresadas no es válida\n")
-        return 0
+        return "Alguna de las fechas ingresadas no es válida"
 
 """
     R10: obtiene la fecha del sistema en formato años, meses, dias
@@ -515,4 +514,4 @@ def mainMenu():
             print("Caracter Inválido")
         print("***********************************************************************************************")
 
-mainMenu()
+#mainMenu()
