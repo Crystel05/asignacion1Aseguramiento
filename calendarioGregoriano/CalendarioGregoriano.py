@@ -235,10 +235,10 @@ def fecha_futura(fecha, diasFuturo):
                 n += 1
             return fechaFuturo
         else:
-            print("El número de días tiene que ser mayor o igual a 0")
-            return ()
+           # print("El número de días tiene que ser mayor o igual a 0")
+            return ("El número de días tiene que ser mayor o igual a 0")
     else:
-        return ()
+        return "La fecha ingresada no es válida"
 
 """ 
     R8: determina la cantidad de dias pasados entre las dos fechas proporcionadas
