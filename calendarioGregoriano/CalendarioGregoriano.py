@@ -103,7 +103,7 @@ def dia_siguiente(tupla):
                     if dia < 31:  # para los días 28, 29 y 30
                         return anno, mes, dia + 1
     else:
-        return ()
+        return "La fecha ingresada es invalida"
 
 """
     R4: determina cuál es la posición de la fecha dada dentro del año dado
