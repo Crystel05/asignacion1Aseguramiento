@@ -5,13 +5,6 @@ import CalendarioGregoriano as cg
 # python -m unittest -v test_CalendarioGregoriano
 
 class TestCalendarioGregoriano(unittest.TestCase):
-    
-    def test_fecha_futura(self):
-        self.assertEqual(cg.fecha_futura((2022, 10, 31), 25), (2022, 11, 25))
-        self.assertEqual(cg.fecha_futura((2022, -10, 5), 4), "La fecha ingresada no es válida")
-        self.assertEqual(cg.fecha_futura((2150, 5), 10), "La fecha ingresada no es válida")
-        self.assertEqual(cg.fecha_futura((2500, -1), -10.5), "La fecha ingresada no es válida")
-        self.assertEqual(cg.fecha_futura((2022, 5, 15), 10.5), "El número de días tiene que ser mayor o igual a 0")
 
     def test_edad_al(self):
         self.assertEqual(cg.edad_al((1999, 7, 29), (2005, 10, 15)), (6, 2, 16))
